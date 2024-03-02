@@ -6,6 +6,8 @@ BUILD_DIR := build
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
+CPPFLAGS += -I vendor/crow/include
+
 $(TARGET): $(OBJ_FILES)
 	g++ -o $@ $^
 
@@ -17,4 +19,4 @@ $(BUILD_DIR):
 	mkdir $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
-	g++ -o $@ -c $<
+	g++ -o $@ -c $(CPPFLAGS) $<
